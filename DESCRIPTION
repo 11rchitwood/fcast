@@ -3,6 +3,7 @@ Title: Forecasting Framework for Time Series and Linear Models
 Version: 0.0.0.9000
 Authors@R:
     person("Ryan", "Chitwood", role = c("aut", "cre"),
+           email = "26073857+11rchitwood@users.noreply.github.com", 
            comment = c(ORCID = "0000-0002-0255-5603"))
 Description: A shiny app and targets pipeline for displaying and analysing
              time series forecasts.
