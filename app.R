@@ -1,5 +1,18 @@
 library(shiny)
 library(forecast)
+library(tidyverse)
+
+all_datasets <- data()$results |>
+  as_tibble() |>
+  transmute(name = str_split(Item, " ")) |>
+  mutate(name = map_chr(name, 1))
+
+ts_datasets <- all_datasets |>
+  mutate(obj = map(name, get)) |>
+  mutate(class = map(obj, class)) |>
+  mutate(is_ts = map_lgl(class, ~ "ts" %in% .x)) |>
+  filter(is_ts) |>
+  pull(name)
 
 ui <- shinyUI(
   fluidPage(
@@ -9,7 +22,7 @@ ui <- shinyUI(
         selectInput(
           inputId = "dataset",
           label = "Dataset:",
-          choices = c("AirPassengers", "WWWusage")
+          choices = ts_datasets
         ),
         numericInput(
           inputId = "h",

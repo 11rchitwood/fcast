@@ -1,0 +1,11 @@
+name: fcast
+title:
+username:
+account: plotthedata
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6445490
+bundleId: 5985650
+url: https://plotthedata.shinyapps.io/fcast/
+when: 1654610155.16549
+lastSyncTime: 1654610155.16549
