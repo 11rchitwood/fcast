@@ -40,10 +40,17 @@ ui <- shinyUI(
 )
 
 server <- shinyServer(function(input, output) {
-  output$forecastPlot <- renderPlot({
-    get(input$dataset) |>
-      forecast(h = input$h, lambda = if (input$box_cox) "auto") |>
-      plot()
+  observeEvent(input$dataset, {
+    obj <- get(input$dataset)
+
+    new_h <- ifelse(frequency(obj) > 1, 2 * frequency(obj), 10)
+    updateNumericInput(inputId = "h", value = new_h)
+
+    output$forecastPlot <- renderPlot({
+      obj |>
+        forecast(h = input$h, lambda = if (input$box_cox) "auto") |>
+        plot()
+    })
   })
 })
 
